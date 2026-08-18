@@ -1,0 +1,54 @@
+{
+  "stages": {
+    "formula_change": {
+      "from": "piecewise V_d_eff = min(Vd, Vdsat), CLM multiplicative",
+      "to": "smooth-min V_d_eff = Vd*Vdsat/sqrt(Vd^2+Vdsat^2), CLM additive",
+      "reason": "piecewise V_d_eff could not capture the soft saturation in Zhu Id-Vd at Vg=2V (Id grows only 1.43x from Vd=0.1 to Vd=1, not 10x expected from linear). smooth-min preserves asymptotes (Vd_eff->Vd for Vd<<Vdsat, Vd_eff->Vdsat for Vd>>Vdsat) and is C^1 smooth."
+    },
+    "calibration_strategy": "grid search over (n_power, K_pre, alpha_sat, alpha_DIBL) targeted at key bias errors",
+    "params_at_bound": []
+  },
+  "parameters": {
+    "V_fb": -0.5,
+    "V_th0": 0.4,
+    "m_body": 1.8,
+    "mu_0": 80.0,
+    "mu_b": 15.0,
+    "USR": 1e-14,
+    "E_USC": 1.5,
+    "alpha_DIBL": 0.08,
+    "alpha_sat": 0.03,
+    "CLM": 0.0,
+    "K_pre": 0.7,
+    "n_power": 1.7,
+    "N_D": 1e+18,
+    "eps_s": 10.0,
+    "eps_ox": 22.0,
+    "lambda_eff": 1.5e-08
+  },
+  "geometry": {
+    "L_nm": 55.0,
+    "CD_nm": 50.0,
+    "t_ch_nm": 3.0,
+    "t_ox_nm": 8.0,
+    "W_eff_nm": 157.07963267948966
+  },
+  "key_bias_errors_v1_to_v11": {
+    "Vg=1.2 Vd=0.1": {
+      "v1": "1.05 us (paper 6 us, 82% off)",
+      "v1.1": "6.39 us (paper 6 us, 6% off)"
+    },
+    "Vg=2.0 Vd=0.1": {
+      "v1": "2.59 us (paper 35 us, 93% off)",
+      "v1.1": "37.94 us (paper 35 us, 8% off)"
+    },
+    "Vg=1.2 Vd=1.0": {
+      "v1": "16.05 us (paper 8 us, 100% off)",
+      "v1.1": "8.27 us (paper 8 us, 3% off)"
+    },
+    "Vg=2.0 Vd=1.0": {
+      "v1": "54.64 us (paper 50 us, 9% high in v1, but 60% off from idvd 22 us)",
+      "v1.1": "47.35 us (paper 50 us, 5% off)"
+    }
+  }
+}

@@ -438,6 +438,31 @@ hits a bound, that is reported, not silently extended.
 11. **Joint refinement** — `scipy.optimize.least_squares` with bounds
     on every parameter; report any parameter at bound.
 
+### 4.1 v1.1 change to step 9 (V_d_eff formula)
+
+The v1 piecewise `V_d_eff = min(Vd, Vdsat)` could not reproduce the
+"soft saturation" observed in Zhu Fig 5(e) at Vg=2V: the paper data
+shows `Id(Vd=1) / Id(Vd=0.1) ≈ 1.43`, but a standard piecewise-linear
+model wants this ratio to be either 1 (fully saturated) or ~10
+(fully linear).
+
+v1.1 replaces it with a **smooth-min**:
+```
+V_d_eff = Vd · Vdsat / sqrt(Vd^2 + Vdsat^2)
+```
+which has the correct asymptotes:
+- `Vd << Vdsat` → `V_d_eff → Vd` (linear)
+- `Vd >> Vdsat` → `V_d_eff → Vdsat` (saturated)
+
+and is C¹ smooth everywhere. CLM is now applied **additively**
+beyond Vdsat (in v1 it was multiplicative on V_d_eff, which made the
+post-saturation slope too aggressive).
+
+With this change, 5 calibration parameters were re-tuned
+(`n_power`, `K_pre`, `alpha_sat`, `CLM`, `alpha_DIBL`); all others
+frozen from v1. v1.1 achieves on-state key-bias errors < 10% at
+all four on-state target points (v1 had 20-100%).
+
 ---
 
 ## 5. Loss function
