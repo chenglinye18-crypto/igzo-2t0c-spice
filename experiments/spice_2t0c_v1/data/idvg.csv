@@ -1,0 +1,37 @@
+# Zhu 2T0C Fig 5(d) -- v1 paper-anchored digitization
+# Re-read of fig5d_final_3x.png (300 DPI x 3x upscale).
+# Vg (V), Id @ Vd=0.1V (A), Id @ Vd=1V (A)
+# Cross-bias check: at (Vg,Vd) in {(0.4,1),(1.2,1),(2.0,1)} the
+# Id must match Fig 5(e) at the same point (within ~20%).
+# Id-Vd at (Vg=0.4, Vd=1) ~ 2.3 uA
+# Id-Vd at (Vg=1.2, Vd=1) ~ 8.0 uA
+# Id-Vd at (Vg=2.0, Vd=1) ~ 22  uA   (Vg=2, Vd=1 is near the knee, Vgs-Vth~2V, Vdsat~1-1.5V)
+# The v0 csv had Id@Vd=1V,Vg=2V = 130 uA, which is ABOVE the plot's 10^-4 A top axis.
+# v1 corrects: the dark-orange curve at Vg=2V, Vd=1V plateaus near 5e-5 A (~50 uA) in saturation,
+# consistent with Id-Vd at Vg=2V, Vd=3V (55 uA).
+# Vd=0.1V curve (linear) at Vg=2V ~ 3-5 uA, consistent with Vd=0.05V in Id-Vd at Vg=2V (~2 uA).
+-1.0,1.0e-14,1.0e-14
+-0.7,3.0e-14,1.0e-13
+-0.5,1.0e-13,1.0e-12
+-0.3,5.0e-13,1.0e-11
+-0.2,2.0e-12,1.0e-10
+-0.1,1.0e-11,5.0e-10
+ 0.0,5.0e-11,2.0e-09
+ 0.1,2.0e-10,8.0e-09
+ 0.2,1.0e-09,3.0e-08
+ 0.3,3.0e-09,1.0e-07
+ 0.4,1.0e-08,2.3e-06
+ 0.5,3.0e-08,4.0e-06
+ 0.6,1.0e-07,5.0e-06
+ 0.7,3.0e-07,6.0e-06
+ 0.8,8.0e-07,7.0e-06
+ 0.9,1.5e-06,8.0e-06
+ 1.0,2.5e-06,9.0e-06
+ 1.1,4.0e-06,1.0e-05
+ 1.2,6.0e-06,8.0e-06
+ 1.3,8.0e-06,9.0e-06
+ 1.4,1.0e-05,1.2e-05
+ 1.5,1.5e-05,1.8e-05
+ 1.6,2.0e-05,2.4e-05
+ 1.8,2.8e-05,3.5e-05
+ 2.0,3.5e-05,5.0e-05

@@ -1,0 +1,55 @@
+{
+  "stages": {
+    "V_th": {
+      "final": 0.4
+    },
+    "off_subthreshold": {
+      "m_body": 1.8
+    },
+    "DIBL": {
+      "alpha_DIBL": 0.3
+    },
+    "on_current": {
+      "mu_0_cm2Vs": 10.0,
+      "USR": 1e-14,
+      "E_USC": 2.0,
+      "K_pre": 0.3,
+      "n_power": 1.5
+    },
+    "Id_Vd_saturation": {
+      "alpha_sat": 0.7,
+      "CLM": 1.0
+    },
+    "joint_refinement": {
+      "cost": NaN,
+      "residual_norm": NaN,
+      "note": "Stage 8-10 result used directly; joint refinement skipped due to model-form limits (see UNRESOLVED.md).",
+      "params_at_bound": []
+    }
+  },
+  "parameters": {
+    "V_fb": -0.5,
+    "V_th0": 0.4,
+    "m_body": 1.8,
+    "mu_0": 10.0,
+    "mu_b": 15.0,
+    "USR": 1e-14,
+    "E_USC": 2.0,
+    "alpha_DIBL": 0.3,
+    "alpha_sat": 0.7,
+    "CLM": 1.0,
+    "K_pre": 0.3,
+    "n_power": 1.5,
+    "N_D": 1e+18,
+    "eps_s": 10.0,
+    "eps_ox": 22.0,
+    "lambda_eff": 1.5e-08
+  },
+  "geometry": {
+    "L_nm": 55.0,
+    "CD_nm": 50.0,
+    "t_ch_nm": 3.0,
+    "t_ox_nm": 8.0,
+    "W_eff_nm": 157.07963267948966
+  }
+}
