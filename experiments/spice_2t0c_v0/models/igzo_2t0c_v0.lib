@@ -1,0 +1,79 @@
+* =====================================================================
+*  igzo_2t0c_v0.lib
+*  --------------------------------------------------------------------
+*  Paper-anchored BEHAVIORAL SURROGATE model for the Zhu 2T0C OSFET
+*  device.  NOT a re-implementation of Zhu's surface-potential compact
+*  model.  See reference_notes.md and scripts/fit_device.py.
+*
+*  The model captures:
+*    - sub-threshold leakage
+*    - smooth triode-to-saturation transition
+*    - on-current in the same order of magnitude as paper Fig 5
+*
+*  It does NOT capture:
+*    - DIBL, channel-length modulation
+*    - BTI, self-heating, gate leakage
+*    - body effect
+*    - separate mobility model; K is a lumped behavioral constant
+*
+*  Geometry (from Fig. 5 caption, paper):
+*    L         = 55 nm
+*    CD        = 50 nm
+*    t_IGZO    = 3 nm
+*    t_HfOx    = 8 nm
+*    W_eff     = pi * CD  (used in the paper's compact model; not used
+*                          in this surrogate; K absorbs geometry)
+*
+*  PAPER_ANCHORED_SURROGATE
+*  NOT_ZHU_ORIGINAL_COMPACT_MODEL
+* =====================================================================
+
+.SUBCKT XOSFET_2T0C D G S B
+*   D -- drain
+*   G -- gate
+*   S -- source
+*   B -- body (tied to S internally; no separate body model in v0)
+
+*  Surrogate parameters
+.PARAM K_2T0C=2.280187e-06
+.PARAM VTH_2T0C=-0.278078
+.PARAM A_2T0C=3.500000
+.PARAM ALPHA_VDSAT_2T0C=0.657662
+.PARAM K_SMOOTH_2T0C=3.102452
+.PARAM N_SUB_2T0C=3.000000
+
+*  I_d(Vgs, Vds):
+*    Vov    = V(G,S) - VTH_2T0C
+*    Vov_p  = MAX(Vov, 0)
+*    Vov_n  = MIN(Vov, 0)
+*    Vdsat  = ALPHA_VDSAT_2T0C * Vov_p
+*    Vds_eff= V(D,S) * Vdsat / (Vdsat^K_SMOOTH + |V(D,S)|^K_SMOOTH + 1e-30)^(1/K_SMOOTH)
+*    I_on   = K_2T0C * (Vov_p + 1e-12)^A_2T0C * Vds_eff
+*    I_sub  = K_2T0C * 1e-6 * exp(MIN(Vov_n, 0) / (N_SUB_2T0C * 0.02585))
+*    I_d    = I_on + I_sub
+*
+*  Caveat: at Vov > 0 the sub-threshold term evaluates to a constant
+*  K_2T0C * 1e-6 * exp(0) = K_2T0C * 1e-6 A (a small on-region floor,
+*  used to keep ngspice numerical at Vgs = VWL_OFF).  At Vov < 0, the
+*  exponential decays the sub-threshold current.
+
+B_ID D S I=
++    (K_2T0C *
++     (MAX(V(G,S) - VTH_2T0C, 0) + 1e-12) ** A_2T0C *
++     SGN(V(D,S)) *
++     (0.5 * (ABS(V(D,S)) + ALPHA_VDSAT_2T0C*MAX(V(G,S) - VTH_2T0C, 0) -
++      SQRT((ABS(V(D,S)) - ALPHA_VDSAT_2T0C*MAX(V(G,S) - VTH_2T0C, 0))**2 + 1e-12)
++     ))
++    ) +
++    (K_2T0C * 1.0e-6 *
++     EXP(MIN(V(G,S) - VTH_2T0C, 0) / (N_SUB_2T0C * 0.02585))
++    )
+
+*  No device-internal capacitance (lumped outside in the parasitic RC).
+.ENDS XOSFET_2T0C
+
+
+*  Convenience alias for DC Id-Vg / Id-Vd sweeps (B tied to S).
+.SUBCKT XOSFET_DC D G S
+X1 D G S S XOSFET_2T0C
+.ENDS XOSFET_DC

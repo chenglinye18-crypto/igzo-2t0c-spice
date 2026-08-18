@@ -1,0 +1,25 @@
+{
+  "model_type": "BEHAVIORAL_SURROGATE",
+  "idvg": {
+    "log10_RMSE_Vd0p1": 1.0449870235351533,
+    "log10_RMSE_Vd1": 0.7469652727917793
+  },
+  "idvd": {
+    "rel_RMSE_Vg0p4": 0.8394837808109377,
+    "rel_RMSE_Vg1p2": 0.3020850811319727,
+    "rel_RMSE_Vg2p0": 0.5479301593186288
+  },
+  "params": {
+    "K_A_per_VpowA": 2.280187113440571e-06,
+    "log10_K": -5.64202951308708,
+    "Vth_V": -0.27807772076545406,
+    "a_exp": 3.4999999999643565,
+    "alpha_vdsat": 0.6576618720235627,
+    "k_smooth": 3.102451910399528,
+    "n_sub": 2.9999999999999996
+  },
+  "cost": 28.297948594268462,
+  "status": 2,
+  "message": "`ftol` termination condition is satisfied.",
+  "success": true
+}

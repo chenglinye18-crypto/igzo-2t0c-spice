@@ -1,0 +1,21 @@
+# raw tran data -- see write1.log for the full ngspice output
+Index,time,v(wwl),v(wbl),v(rwl)
+Index,time,v(wwl),v(wbl),v(rwl)
+Index,time,v(wwl),v(wbl),v(rwl)
+Index,time,v(wwl),v(wbl),v(rwl)
+Index,time,v(wwl),v(wbl),v(rwl)
+Index,time,v(rbl),v(sn),v(vdd)
+Index,time,v(rbl),v(sn),v(vdd)
+Index,time,v(rbl),v(sn),v(vdd)
+Index,time,v(rbl),v(sn),v(vdd)
+Index,time,v(rbl),v(sn),v(vdd)
+Index,time,v_wwl#branch,v_wbl#branch,v_rbl#branch
+Index,time,v_wwl#branch,v_wbl#branch,v_rbl#branch
+Index,time,v_wwl#branch,v_wbl#branch,v_rbl#branch
+Index,time,v_wwl#branch,v_wbl#branch,v_rbl#branch
+Index,time,v_wwl#branch,v_wbl#branch,v_rbl#branch
+Index,time,v_dd#branch
+Index,time,v_dd#branch
+Index,time,v_dd#branch
+Index,time,v_dd#branch
+Index,time,v_dd#branch

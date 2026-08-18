@@ -1,0 +1,75 @@
+{
+  "schema": {
+    "version": "v0",
+    "note": "Single 2T0C cell, lumped parasitics, surrogate device model, functional sense stub.  See reference_notes.md and the final report.",
+    "units_E": "J (Joules)",
+    "units_P": "W (Watts)"
+  },
+  "operations": {
+    "write0": {
+      "E_window_J": -1.4399759998812e-13,
+      "E_total_J": -2.879951999881197e-13,
+      "window_s": [
+        1e-09,
+        1.1e-08
+      ],
+      "E_window_fJ": -143.99759998812002,
+      "E_total_fJ": -287.99519998811974
+    },
+    "write1": {
+      "E_window_J": -1.4399759998812e-13,
+      "E_total_J": -2.879951999881197e-13,
+      "window_s": [
+        1e-09,
+        1.1e-08
+      ],
+      "E_window_fJ": -143.99759998812002,
+      "E_total_fJ": -287.99519998811974
+    },
+    "read0": {
+      "E_window_J": -1.6642594620473998e-17,
+      "E_total_J": -1.096046152144857e-16,
+      "window_s": [
+        1.5e-08,
+        2e-08
+      ],
+      "E_cell_and_RC_J": -1.6642594620473998e-17,
+      "E_with_sense_stub_J": -1.6642594620473998e-17,
+      "E_window_fJ": -0.016642594620474,
+      "E_total_fJ": -0.1096046152144857,
+      "E_cell_and_RC_fJ": -0.016642594620474,
+      "E_with_sense_stub_fJ": -0.016642594620474
+    },
+    "read1": {
+      "E_window_J": -3.2073758112120044e-14,
+      "E_total_J": -1.3786117538629274e-13,
+      "window_s": [
+        1.5e-08,
+        2e-08
+      ],
+      "E_cell_and_RC_J": -3.2073758112120044e-14,
+      "E_with_sense_stub_J": -3.2073758112120044e-14,
+      "E_window_fJ": -32.073758112120046,
+      "E_total_fJ": -137.86117538629273,
+      "E_cell_and_RC_fJ": -32.073758112120046,
+      "E_with_sense_stub_fJ": -32.073758112120046
+    }
+  },
+  "paper_table_I_comparison": {
+    "read0": 6e-16,
+    "read1": 3.6800000000000005e-13,
+    "write00": 3e-16,
+    "write01": 3.7000000000000005e-16,
+    "write10": 5.8e-16,
+    "write11": 2.4e-16,
+    "P_hold_W_per_row": 4.26e-15
+  },
+  "caveats": [
+    "All operation energies are integrated from the ngspice transient of a single 2T0C cell.",
+    "The surrogate OSFET model is a non-physical behavioral B-source fitted to a hand-digitized subset of Zhu Fig 5(d,e).  The Id-Vg fit has log10 RMSE ~1 decade; Id-Vd rel RMSE ~0.5.",
+    "WWL/WBL/RWL/RBL line resistances are taken from Fig 4(b) of the paper (a few ohms per cell).",
+    "Storage-node intrinsic C is a v0 MODELING_CHOICE of 1 fF (paper does not publish a 2T0C intrinsic C).",
+    "The sense amplifier is a functional behavioral stub, NOT a calibrated Si-MOS CSA.  Read energy includes the stub bias.",
+    "No 512x512 distributed network, no BTI, no thermal, no aging, no workload -- this is a single-cell, fixed-bias, single-transient sandbox."
+  ]
+}
