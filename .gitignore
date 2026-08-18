@@ -1,0 +1,36 @@
+# --- Reference papers / local-only material (DO NOT push) ---
+ref/
+
+# --- Per-experiment scratch (already gitignored in the v0 sandbox,
+#     but keep a project-level guard so future experiments do not
+#     accidentally commit temp dirs) ---
+**/test_run/
+**/__pycache__/
+**/*.pyc
+
+# --- OS junk ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Editor / IDE junk ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# --- Python caches ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# --- ngspice transient / scratch artefacts that should never be
+#     committed (full logs ARE committed for reproducibility, but
+#     scratch diagnostic files are not) ---
+*.raw
+*.ic0
+*.save
+*.bin
